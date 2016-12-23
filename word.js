@@ -1,51 +1,44 @@
-// var Letter = require('./letter.js');
-//
-// var Word = function(word) {
-//   this.letters = [];
-//   this.word = word;
-//   this.addLetter = function(letter) {
-//     this.letters.push(new Letter(letter));
-//   }
-// }
-//
-// module.exports = Word;
+var Letter = require('./letter.js');
 
-var Letter = require('./letter');
-module.exports = function() {
-  var words = ['hello'];
-  this.selectedWord = [];
-  var valuesLeft = 0;
-  this.selectWord = function() {
-    var index = 0;
-    var word = words[index];
-    valuesLeft = word.length;
+var Word = function(word){
+	this.word = word;
+	this.letters = [];
+	this.found = false;
 
-    word.split('').forEach(function (currentLetter) {
-      this.selectedWord.push(new Letter(currentLetter));
-    })
-  }
+	this.get_letter = function() {
+		for(var i = 0; i < this.word.length; i++) {
+			this.letters.push(new Letter(this.word[i]));
+		}
+	};
 
-  this.isWordGuessed = function() {
-    var isGuessed = true;
-    this.selectedWord.forEach(function () {
-      if (letter.displayValue === '_') {
-        isGuessed = false;
-      }
-    });
-    return isGuessed;
+	this.check_word = function() {
+	this.found = this.letters.every(function(current_letter) {
+			return current_letter.appear;
+		});
 
-  }
+		return this.found;
+	};
 
-  this.isLetterInWord = function(guessedLetter) {
-    var isInWord = false;
-    this.selectedWord.forEach(function (letter) {
+	this.check_letter = function(letter_guessed) {
+		var return_value = 0;
+		for(var i = 0; i < this.letters.length; i++) {
+			if (this.letters[i].character == letter_guessed){
+				this.letters[i].appear = true;
+				return_value++;
+			}
+		}
+		return return_value;
+	};
 
-      if (letter === gussedLetter) {
-        isInWord = true;
-      }
-    });
+	this.show_word = function() {
+		var str = '';
 
-    return isInWord;
-  }
+		for(var i=0; i < this.letters.length; i++){
+			str += this.letters[i].show_letter();
+		}
 
+		return str;
+	};
 }
+
+module.exports = Word;

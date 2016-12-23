@@ -1,16 +1,10 @@
-// var LetterSpace = function(alphabet) {
-//   this.letter = alphabet;
-//   this.blankspace = "_";
-//   this.guessed = false;
-// }
-//
-// module.exports = LetterSpace;
+var Letter = function(letter) {
 
-module.exports = function(letter) {
-  this.displayValue = '_';
+	this.character = letter;
+	this.appear = false;
+	this.show_letter = function() {
+		return !(this.appear) ? " _ " : this.character;
+	};
+};
 
-  this.letter = letter;
-  this.showLetter = function() {
-    this.displayValue = letter;
-  }
-}
+module.exports = Letter;
