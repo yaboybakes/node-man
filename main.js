@@ -5,7 +5,6 @@ prompt.start();
 
 game = {
     wordBank: choices,
-    words_guessed_correctly: 0,
     guesses_left: 10,
     current_word: null,
     start_game: function(wrd) {
